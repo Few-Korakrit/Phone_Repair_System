@@ -102,9 +102,8 @@ namespace ระบบแจ้งซ่อมมือถือ.View
 
 
             string reportTitle = "รายงานประจำวัน"; // หัวข้อรายงาน
-            DateTime startDate = DateTime.ParseExact(startDateStr, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date;
-            DateTime endDate = DateTime.ParseExact(endDateStr, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date;
-            // กำหนดหัวข้อรายงานและช่วงวันที่
+           
+
 
 
             // ปิดการทำงานของ ViewState ในการ Export
@@ -118,7 +117,13 @@ namespace ระบบแจ้งซ่อมมือถือ.View
                     // เพิ่มหัวข้อรายงานและช่วงวันที่ลงในเนื้อหา
                     hw.Write("<div style='text-align:center; font-weight:bold;'>");
                     hw.Write("<h3 style='margin: 0;'>" + reportTitle + "</h3>");
-                    hw.Write("<p style='margin: 0;'>ตั้งแต่วันที่: " + startDate.ToString("dd/MM/yyyy") + " ถึงวันที่: " + endDate.ToString("dd/MM/yyyy") + "</p>");
+                    if (startDateStr != "" && endDateStr != "")
+                    {
+                        DateTime startDate = DateTime.ParseExact(startDateStr, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date;
+                        DateTime endDate = DateTime.ParseExact(endDateStr, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date;
+                        hw.Write("<p style='margin: 0;'>ตั้งแต่วันที่: " + startDate.ToString("dd/MM/yyyy") + " ถึงวันที่: " + endDate.ToString("dd/MM/yyyy") + "</p>");
+                    }
+
                     hw.Write("</div><br/>");
 
                     // ปิดการแบ่งหน้าเพื่อให้แสดงข้อมูลครบ

@@ -216,8 +216,15 @@ namespace ระบบแจ้งซ่อมมือถือ.View
                         string orderPrice = dataRow["O_Price"].ToString();     // ราคา
                         string cartQuantity = dataRow["cart_quantity"].ToString(); // จำนวนสินค้า
 
+                        double dtorderPrice = Convert.ToDouble(orderPrice);
+                        double dtcartQuantity = Convert.ToDouble(cartQuantity);
+                        int order_Price = Convert.ToInt32(dtorderPrice);
+                        int Quantity = Convert.ToInt32(dtcartQuantity);
+                        int sum_orders = order_Price* Quantity;
+
                         // นำข้อมูลไปแสดงใน Label หรือใช้ประโยชน์
-                        Label1.Text += $"สินค้า: {orderName}, ราคา: {orderPrice}, จำนวน: {cartQuantity},<br/>";
+                        Label1.Text += $"สินค้า: {orderName}, ราคา: {orderPrice}฿, จำนวน: {cartQuantity},<br/>";
+                        sum_order.Text += $"{sum_orders}฿<br/>";
                     }
                 }
                 else
@@ -233,10 +240,10 @@ namespace ระบบแจ้งซ่อมมือถือ.View
                 DataTable data_service = Con.GetData(dtservice);
                 string dtservice_row = data_service.Rows[0][0].ToString();
 
-                r_service.Text = "฿" + dtservice_row;
+                r_service.Text = dtservice_row + "฿";
                 //order.Text = dtO_Name;
                 //Ptotal.Text = "฿"+ dtR_total;
-                sumtotle.Text = "฿" + dtR_total;
+                sumtotle.Text = dtR_total + "฿";
                 //rateidprint.Text = dtRate_id;
                 //cname.Text = dtC_name;
                 //phone.Text = "";

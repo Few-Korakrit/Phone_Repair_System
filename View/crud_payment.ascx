@@ -171,7 +171,6 @@
         <asp:PostBackTrigger ControlID="AuthorsList" />
     </Triggers>
 </asp:UpdatePanel>
-
 <style>
     .container1 {
         width: 100%;
@@ -180,7 +179,7 @@
         border: 1px solid black;
         padding: 20px;
         display: none;
-        /*ซ่อนจากหน้าจอปกติ*/
+        /* ซ่อนจากหน้าจอปกติ */
     }
 
     .font1 {
@@ -206,6 +205,11 @@
 
     .text-right {
         text-align: right;
+    }
+
+    .text-end {
+        text-align: right;
+        flex: 1; /* ใช้ flex เพื่อครอบคลุมพื้นที่ที่เหลือ */
     }
 
     .strong-text {
@@ -239,9 +243,7 @@
     }
 </style>
 
-
-
-<div class="container1 " id="print">
+<div class="container1" id="print">
     <div class="text-right">
         <p>05/07/2567</p>
     </div>
@@ -269,7 +271,6 @@
             <asp:Label ID="printcname" runat="server" Text=""></asp:Label>
         </p>
     </div>
-
     <div class="info-row">
         <p>
             <span class="strong-text">โทรศัพท์มือถือ:</span>
@@ -280,25 +281,19 @@
         <p>
             <span class="strong-text">รายการ:</span>
             <asp:Label ID="order" runat="server" Text=""></asp:Label>
-            <asp:Label ID="Ptotal" runat="server" Text=""></asp:Label>
         </p>
-        <p>
+        <p class="text-end">
             <span class="strong-text">รายการ:</span>
-            <asp:Label ID="Label1" runat="server" Text="ค่าบริการ"></asp:Label>
+            <asp:Label ID="Label221" runat="server" Text="ค่าบริการ"></asp:Label>
             <asp:Label ID="Label3" runat="server" Text=""></asp:Label>
-            <asp:Label ID="Label4" runat="server" Text=""></asp:Label>
         </p>
     </div>--%>
-
     <div class="info-row">
         <p>
             <span class="strong-text">อาการเสีย:</span>
             <asp:Label ID="rate_broken" runat="server" Text=""></asp:Label>
         </p>
     </div>
-
-
-
     <div class="info-row">
         <p>
             <span class="strong-text">ราคา อะไหล่:</span>
@@ -306,20 +301,32 @@
     </div>
     <div class="info-row">
         <p>
-            <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
         </p>
     </div>
+
+
+    <div class="info-row">
+        <p>
+            <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+        </p>
+        <p class="text-end">
+            <asp:Label ID="sum_order" runat="server" Text=""></asp:Label>
+        </p>
+    </div>
+
     <div class="info-row">
         <p>
             <span class="strong-text">ค่าบริการ:</span>
+        </p>
+        <p class="text-end">
             <asp:Label ID="r_service" runat="server" Text=""></asp:Label>
         </p>
     </div>
-
-
     <div class="info-row">
         <p>
             <span class="strong-text">ราคาสุทธิ:</span>
+        </p>
+        <p class="text-end">
             <asp:Label ID="sumtotle" runat="server" Text=""></asp:Label>
         </p>
     </div>
@@ -335,7 +342,6 @@
             <asp:Label ID="print_ename" runat="server" Text=""></asp:Label>
         </p>
     </div>
-
     <p>กรุณาติดต่อชื่อข้างต้นเพื่อนำใบแจ้งซ่อมเข้ารับสินค้าตามกำหนด หรือติดต่อสอบถามเพิ่มเติมได้ที่ศูนย์</p>
     <div class="divider"></div>
     <p class="text-center">PPM Service ยินดีให้บริการ</p>

@@ -253,6 +253,11 @@
         font-weight: bold;
     }
 
+    .text-end {
+        text-align: right;
+        flex: 1; /* ใช้ flex เพื่อครอบคลุมพื้นที่ที่เหลือ */
+    }
+
     .divider {
         border-top: 1px solid black;
         margin: 10px 0;
@@ -324,22 +329,36 @@
         <p>
             <span class="strong-text">ราคา อะไหล่:</span>
         </p>
-    </div>     
+    </div>
+    <div class="info-row">
+        <p>
+        </p>
+    </div>
+
+
     <div class="info-row">
         <p>
             <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
         </p>
-    </div>  
+        <p class="text-end">
+            <asp:Label ID="sum_order" runat="server" Text=""></asp:Label>
+        </p>
+    </div>
+
 
     <div class="info-row">
         <p>
             <span class="strong-text">ค่าบริการ:</span>
+        </p>
+        <p class="text-end">
             <asp:Label ID="r_service" runat="server" Text=""></asp:Label>
         </p>
-    </div> 
+    </div>
     <div class="info-row">
         <p>
             <span class="strong-text">ราคา ณ วันที่แจ้งซ่อม:</span>
+        </p>
+        <p class="text-end">
             <asp:Label ID="total" runat="server" Text=""></asp:Label>
         </p>
     </div>

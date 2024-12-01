@@ -42,14 +42,13 @@ namespace ระบบแจ้งซ่อมมือถือ.View
                 DateTime endDate = DateTime.ParseExact(endDateStr, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date;
 
 
-                Query = @"SELECT Payment.P_id, Payment.P_date, Customer.C_Name, Customer.C_Tel, Customer.C_Email,
-                            Repair.R_id, Repair.R_date, Repair.R_status, Repair.R_total, TableOrder.O_Name, rate_total
-                     FROM Payment
-                     INNER JOIN Repair ON Payment.R_id = Repair.R_id
-                     INNER JOIN Customer ON Repair.C_id = Customer.C_ID
-                     INNER JOIN rate ON Repair.rate_id = rate.rate_id
-                     INNER JOIN TableOrder ON Repair.O_id = TableOrder.O_ID
-                        where P_Date BETWEEN  @StartDate AND @EndDate";
+                Query = @"select Payment.P_id,Payment.P_date,Customer.C_Name,Customer.C_Tel,Customer.C_Email,
+                            Repair.R_id,Repair.R_date,Repair.R_status,Repair.R_total,rate_total,rate.note
+                            from Payment
+                            inner join Repair on Payment.R_id = Repair.R_id                     
+                            inner join rate on Repair.Rate_id = rate.Rate_id
+                            inner join Customer on Repair.C_id = Customer.C_ID
+                            where R_status = N'ซ่อมเสร็จแล้ว' and P_Date BETWEEN  @StartDate AND @EndDate";
                 //string Query = @"SELECT * FROM employee  where E_Date BETWEEN   '%{0}%' and  '%{1}%'";
                 //Query = string.Format(Query, startDate, endDate);
 
@@ -89,13 +88,13 @@ namespace ระบบแจ้งซ่อมมือถือ.View
             }
             else
             {
-                Query = @"SELECT Payment.P_id, Payment.P_date, Customer.C_Name, Customer.C_Tel, Customer.C_Email,
-                            Repair.R_id, Repair.R_date, Repair.R_status, Repair.R_total, TableOrder.O_Name, rate_total
-                     FROM Payment
-                     INNER JOIN Repair ON Payment.R_id = Repair.R_id
-                     INNER JOIN Customer ON Repair.C_id = Customer.C_ID
-                     INNER JOIN rate ON Repair.rate_id = rate.rate_id
-                     INNER JOIN TableOrder ON Repair.O_id = TableOrder.O_ID";
+                Query = @"select Payment.P_id,Payment.P_date,Customer.C_Name,Customer.C_Tel,Customer.C_Email,
+                            Repair.R_id,Repair.R_date,Repair.R_status,Repair.R_total,rate_total,rate.note
+                            from Payment
+                            inner join Repair on Payment.R_id = Repair.R_id                     
+                            inner join rate on Repair.Rate_id = rate.Rate_id
+                            inner join Customer on Repair.C_id = Customer.C_ID
+                            where R_status = N'ซ่อมเสร็จแล้ว'";
 
                 // ดึงข้อมูลจากฐานข้อมูล
                 DataTable dt = Con.GetData(Query);
@@ -153,10 +152,9 @@ namespace ระบบแจ้งซ่อมมือถือ.View
 
 
             string reportTitle = "รายงานประจำวัน"; // หัวข้อรายงาน
-            DateTime startDate = DateTime.ParseExact(startDateStr, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date;
-            DateTime endDate = DateTime.ParseExact(endDateStr, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date;
-            // กำหนดหัวข้อรายงานและช่วงวันที่
-           
+
+          
+
 
             // ปิดการทำงานของ ViewState ในการ Export
             AuthorsList.EnableViewState = false;
@@ -169,7 +167,13 @@ namespace ระบบแจ้งซ่อมมือถือ.View
                     // เพิ่มหัวข้อรายงานและช่วงวันที่ลงในเนื้อหา
                     hw.Write("<div style='text-align:center; font-weight:bold;'>");
                     hw.Write("<h3 style='margin: 0;'>" + reportTitle + "</h3>");
-                    hw.Write("<p style='margin: 0;'>ตั้งแต่วันที่: " + startDate.ToString("dd/MM/yyyy") + " ถึงวันที่: " + endDate.ToString("dd/MM/yyyy") + "</p>");
+                    if (startDateStr != "" && endDateStr != "")
+                    {
+                        DateTime startDate = DateTime.ParseExact(startDateStr, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date;
+                        DateTime endDate = DateTime.ParseExact(endDateStr, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date;
+                        hw.Write("<p style='margin: 0;'>ตั้งแต่วันที่: " + startDate.ToString("dd/MM/yyyy") + " ถึงวันที่: " + endDate.ToString("dd/MM/yyyy") + "</p>");
+                    }
+
                     hw.Write("</div><br/>");
 
                     // ปิดการแบ่งหน้าเพื่อให้แสดงข้อมูลครบ

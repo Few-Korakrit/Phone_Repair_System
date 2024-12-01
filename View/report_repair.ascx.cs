@@ -41,11 +41,10 @@ namespace ระบบแจ้งซ่อมมือถือ.View
                 DateTime startDate = DateTime.ParseExact(startDateStr, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date;
                 DateTime endDate = DateTime.ParseExact(endDateStr, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date;
 
-                Query = @"Select Repair.* , Customer.C_Name ,rate.rate_broken,tableorder.O_name
+                Query = @"Select Repair.* , Customer.C_Name ,rate.rate_broken ,Customer.C_tel
                             from Repair 
                             inner join Customer on Repair.C_ID = Customer.C_ID
                             inner join rate on Repair.rate_id = rate.rate_id
-                            inner join tableorder on Repair.O_id = tableorder.O_id
                             where R_date BETWEEN  @StartDate AND @EndDate";
                 DataTable dt = Con.GetDataByQueryAndDateRange(Query, startDate, endDate);
                 if (dt.Rows.Count > 0)
@@ -62,11 +61,10 @@ namespace ระบบแจ้งซ่อมมือถือ.View
             }
             else
             {
-               Query = @"Select Repair.* , Customer.C_Name ,rate.rate_broken,tableorder.O_name
+               Query = @"Select Repair.* , Customer.C_Name ,rate.rate_broken ,Customer.C_tel
                             from Repair 
                             inner join Customer on Repair.C_ID = Customer.C_ID
-                            inner join rate on Repair.rate_id = rate.rate_id
-                            inner join tableorder on Repair.O_id = tableorder.O_id";
+                            inner join rate on Repair.rate_id = rate.rate_id";
                 AuthorsList.DataSource = Con.GetData(Query);
                 AuthorsList.DataBind();
             }
@@ -96,10 +94,7 @@ namespace ระบบแจ้งซ่อมมือถือ.View
 
 
             string reportTitle = "รายงานประจำวัน"; // หัวข้อรายงาน
-            DateTime startDate = DateTime.ParseExact(startDateStr, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date;
-            DateTime endDate = DateTime.ParseExact(endDateStr, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date;
-            // กำหนดหัวข้อรายงานและช่วงวันที่
-
+         
 
             // ปิดการทำงานของ ViewState ในการ Export
             AuthorsList.EnableViewState = false;
@@ -112,7 +107,13 @@ namespace ระบบแจ้งซ่อมมือถือ.View
                     // เพิ่มหัวข้อรายงานและช่วงวันที่ลงในเนื้อหา
                     hw.Write("<div style='text-align:center; font-weight:bold;'>");
                     hw.Write("<h3 style='margin: 0;'>" + reportTitle + "</h3>");
-                    hw.Write("<p style='margin: 0;'>ตั้งแต่วันที่: " + startDate.ToString("dd/MM/yyyy") + " ถึงวันที่: " + endDate.ToString("dd/MM/yyyy") + "</p>");
+                    if (startDateStr != "" && endDateStr != "")
+                    {
+                        DateTime startDate = DateTime.ParseExact(startDateStr, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date;
+                        DateTime endDate = DateTime.ParseExact(endDateStr, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture).Date;
+                        hw.Write("<p style='margin: 0;'>ตั้งแต่วันที่: " + startDate.ToString("dd/MM/yyyy") + " ถึงวันที่: " + endDate.ToString("dd/MM/yyyy") + "</p>");
+                    }
+
                     hw.Write("</div><br/>");
 
                     // ปิดการแบ่งหน้าเพื่อให้แสดงข้อมูลครบ

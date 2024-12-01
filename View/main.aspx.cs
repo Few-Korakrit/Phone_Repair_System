@@ -82,6 +82,18 @@ namespace ระบบแจ้งซ่อมมือถือ.View
                 else if (part == "report_employee")
                 {
                     LoadUserControl("report_employee.ascx");
+                }
+                else if (part == "report_type")
+                {
+                    LoadUserControl("report_type.ascx");
+                } 
+                else if (part == "report_brand")
+                {
+                    LoadUserControl("report_brand.ascx");
+                } 
+                else if (part == "report_order")
+                {
+                    LoadUserControl("report_order.ascx");
                 } 
                 else if (part == "report_customer")
                 {

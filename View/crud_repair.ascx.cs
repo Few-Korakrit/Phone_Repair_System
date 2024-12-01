@@ -250,9 +250,14 @@ namespace ระบบแจ้งซ่อมมือถือ.View
                         string orderName = dataRow["O_name"].ToString();       // ชื่อสินค้า
                         string orderPrice = dataRow["O_Price"].ToString();     // ราคา
                         string cartQuantity = dataRow["cart_quantity"].ToString(); // จำนวนสินค้า
-
+                        double dtorderPrice = Convert.ToDouble(orderPrice);
+                        double dtcartQuantity = Convert.ToDouble(cartQuantity);
+                        int order_Price = Convert.ToInt32(dtorderPrice);
+                        int Quantity = Convert.ToInt32(dtcartQuantity);
+                        int sum_orders = order_Price * Quantity;
                         // นำข้อมูลไปแสดงใน Label หรือใช้ประโยชน์
-                        Label1.Text += $"สินค้า: {orderName}, ราคา: {orderPrice}, จำนวน: {cartQuantity},<br/>";
+                        Label1.Text += $"สินค้า: {orderName}, ราคา: {orderPrice}฿, จำนวน: {cartQuantity},<br/>";
+                        sum_order.Text += $"{sum_orders}฿<br/>";
                     }
                 }
                 else
@@ -261,14 +266,14 @@ namespace ระบบแจ้งซ่อมมือถือ.View
                 }
 
 
-                r_service.Text = service;
+                r_service.Text =  service + "฿";
                 view_note.Text = rate_note;
                 rateidprint.Text = dtRate_id;
                 cname.Text = dtC_name;
                 phone.Text = "0123456789";
                 printbroken.Text = rate_broken;
                 daterepair.Text = GVR_date;
-                total.Text = dtR_total;
+                total.Text =  dtR_total + "฿" ;
                 print_ename.Text = e_name;
                 //ErrMsg.Text = "ลบข้อมูลสำเร็จ";
                 //Response.Write("<script>alert('Data inserted successfully')</script>");

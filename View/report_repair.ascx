@@ -44,7 +44,7 @@
                 <asp:Button CssClass="btn btn-danger font" ID="cancel" runat="server" Text="ยกเลิก" OnClick="cancel_Click" />
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-               
+
                 <asp:Label ID="ErrMsg" CssClass="font" runat="server"></asp:Label>
             </div>
             <div class="col-2"></div>
@@ -57,12 +57,13 @@
             <asp:BoundField DataField="R_id" HeaderText="รหัสแจ้งซ่อม"></asp:BoundField>
             <asp:BoundField DataField="Rate_id" HeaderText="รหัสประเมินราคา"></asp:BoundField>
             <asp:BoundField DataField="C_id" HeaderText="รหัสลูกค้า"></asp:BoundField>
-            <asp:BoundField DataField="O_id" HeaderText="รหัสรายการ"></asp:BoundField>
+            <%--<asp:BoundField DataField="O_id" HeaderText="รหัสรายการ"></asp:BoundField>--%>
             <asp:BoundField DataField="C_name" HeaderText="ชื่อลูกค้า"></asp:BoundField>
+            <asp:BoundField DataField="C_tel" HeaderText="เบอร์โทร"></asp:BoundField>
             <asp:BoundField DataField="R_date" HeaderText="วันที่แจ้งซ่อม"></asp:BoundField>
             <asp:BoundField DataField="rate_broken" HeaderText="อาการเสีย"></asp:BoundField>
-            <asp:BoundField DataField="O_name" HeaderText="ชื่อรายการอะไหล่"></asp:BoundField>
-            <asp:BoundField DataField="R_quantity" HeaderText="จำนวน"></asp:BoundField>
+            <%--  <asp:BoundField DataField="O_name" HeaderText="ชื่อรายการอะไหล่"></asp:BoundField>
+       <asp:BoundField DataField="R_quantity" HeaderText="จำนวน"></asp:BoundField>--%>
             <asp:BoundField DataField="R_total" HeaderText="ราคา"></asp:BoundField>
             <asp:BoundField DataField="R_status" HeaderText="สถานะ"></asp:BoundField>
         </Columns>
@@ -74,23 +75,55 @@
         $("#<%= txtEndDate.ClientID %>").datepicker({ dateFormat: 'yy-mm-dd' });
     });
 </script>
+
 <script type="text/javascript">
     function printGridView() {
-        var divToPrint = document.getElementById('<%= AuthorsList .ClientID %>'); // ดึง GridView ตาม ID
-        var newWin = window.open('', 'Print-Window');
+        // ดึง GridView ตาม ID
+        var divToPrint = document.getElementById('<%= AuthorsList.ClientID %>');
 
+        // คำนวณยอดรวม
+        var rows = divToPrint.getElementsByTagName('tr');
+        var total = 0;
+        for (var i = 1; i < rows.length; i++) { // ข้ามหัวตาราง
+            var cells = rows[i].getElementsByTagName('td');
+            if (cells.length > 0) {
+                var value = parseFloat(cells[7]?.innerText || 0); // สมมติว่าคอลัมน์ราคาอยู่ index 5
+                total += value;
+            }
+        }
+
+        // เปิดหน้าต่างใหม่สำหรับพิมพ์
+        var newWin = window.open('', 'Print-Window');
         newWin.document.open();
-        newWin.document.write('<html><head><title>พิมพ์</title>');
+
+        // เขียน HTML สำหรับการพิมพ์
+        newWin.document.write('<html><head>');
         newWin.document.write('<style>');
+        newWin.document.write('body { font-family: Arial, sans-serif; font-size: 12px; }');
         newWin.document.write('table { border-collapse: collapse; width: 100%; }');
         newWin.document.write('table, th, td { border: 1px solid black; text-align: left; padding: 8px; }');
+        newWin.document.write('h1 { text-align: center; font-size: 20px; margin-bottom: 5px; }');
+        newWin.document.write('.header-info { display: flex; justify-content: space-between; font-size: 10px; margin-bottom: 10px; }');
         newWin.document.write('</style>');
         newWin.document.write('</head><body>');
-        newWin.document.write(divToPrint.outerHTML); // เพิ่มเฉพาะ GridView ในหน้าใหม่
+
+        // เพิ่มหัวข้อรายงาน
+        newWin.document.write('<h1>รายงานข้อมูลแจ้งซ่อม</h1>');
+
+        // เพิ่มวันที่และยอดรวมให้อยู่บรรทัดเดียวกัน
+        newWin.document.write('<div class="header-info">');
+        newWin.document.write('<h2>วันที่พิมพ์: ' + new Date().toLocaleDateString('th-TH') + '</h2>');
+        newWin.document.write('<h2>รวมยอดราคา: ' + total.toFixed(2) + ' บาท</h2>');
+        newWin.document.write('</div>');
+
+        // เพิ่ม GridView
+        newWin.document.write(divToPrint.outerHTML);
+
         newWin.document.write('</body></html>');
         newWin.document.close();
 
-        newWin.print(); // เรียกคำสั่งพิมพ์
+        // สั่งพิมพ์
+        newWin.print();
         newWin.close();
     }
 </script>

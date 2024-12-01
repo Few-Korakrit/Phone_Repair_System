@@ -370,6 +370,7 @@
     <Content Include="View\crud_payment.ascx" />
     <Content Include="View\crud_rate.ascx" />
     <Content Include="View\crud_repair.ascx" />
+    <Content Include="View\report_brand.ascx" />
     <Content Include="View\report_customer.ascx" />
     <Content Include="View\report_dataemployee.ascx" />
     <Content Include="View\crud_customer.ascx" />
@@ -381,9 +382,11 @@
     <Content Include="View\login.ascx" />
     <Content Include="View\main.aspx" />
     <Content Include="View\report_employee.ascx" />
+    <Content Include="View\report_order.ascx" />
     <Content Include="View\report_payment.ascx" />
     <Content Include="View\report_rate.ascx" />
     <Content Include="View\report_repair.ascx" />
+    <Content Include="View\report_type.ascx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -420,6 +423,13 @@
     </Compile>
     <Compile Include="View\crud_repair.ascx.designer.cs">
       <DependentUpon>crud_repair.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="View\report_brand.ascx.cs">
+      <DependentUpon>report_brand.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\report_brand.ascx.designer.cs">
+      <DependentUpon>report_brand.ascx</DependentUpon>
     </Compile>
     <Compile Include="View\report_customer.ascx.cs">
       <DependentUpon>report_customer.ascx</DependentUpon>
@@ -502,6 +512,13 @@
     <Compile Include="View\report_employee.ascx.designer.cs">
       <DependentUpon>report_employee.ascx</DependentUpon>
     </Compile>
+    <Compile Include="View\report_order.ascx.cs">
+      <DependentUpon>report_order.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\report_order.ascx.designer.cs">
+      <DependentUpon>report_order.ascx</DependentUpon>
+    </Compile>
     <Compile Include="View\report_payment.ascx.cs">
       <DependentUpon>report_payment.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -522,6 +539,13 @@
     </Compile>
     <Compile Include="View\report_repair.ascx.designer.cs">
       <DependentUpon>report_repair.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="View\report_type.ascx.cs">
+      <DependentUpon>report_type.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\report_type.ascx.designer.cs">
+      <DependentUpon>report_type.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

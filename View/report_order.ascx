@@ -1,5 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="report_employee.ascx.cs" Inherits="ระบบแจ้งซ่อมมือถือ.View.report_employee" %>
-
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="report_order.ascx.cs" Inherits="ระบบแจ้งซ่อมมือถือ.View.report_order" %>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -19,60 +18,59 @@
 
 </script>
 
+<div class=" container-fluid">
+    <div class="row mt-5 mb-54">
+        <div class="col-2"></div>
+        <div class="col-8">
+
+            <%--<div class="container-fluid ">--%>
+            <div class="row">
+                <div class="col-md-8"></div>
+                <div class="row col-md-4 d-grid gap-2 d-md-flex justify-content-md-end">
+                </div>
+            </div>
+        </div>
+
         <div class=" container-fluid">
-            <div class="row mt-5 mb-54">
-                <div class="col-2"></div>
-                <div class="col-8">
-
-                    <div class="container-fluid ">
-                        <div class="row">
-                            <div class="col-md-8"></div>
-                            <div class="row col-md-4 d-grid gap-2 d-md-flex justify-content-md-end">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class=" container-fluid">
-                        <h2 class=" text-center">รายงานข้อมูลพนักงาน</h2>
-                        <form action="#">
-                            <div class="row">
-                             <%--   <div class="col">
+            <h2 class=" text-center">รายงานข้อมูลรายการสินค้า</h2>
+            <form action="#">
+                <div class="row">
+                    <%--   <div class="col">
                                     <div class=" d-grid gap-2 d-md-flex justify-content-md-end mt-2">
                                         <asp:TextBox class="form-control w-75 " ID="tb_search" placeholder="ค้นหาข้อมูลประเภทอะไหล่" runat="server"></asp:TextBox>
                                         <asp:LinkButton ID="submit_search_employee" OnClick="submit_search_Click" CssClass="col-sm-2  btn btn-outline-primary" runat="server"><i class="fa fa-search" aria-hidden="true"></i></asp:LinkButton>
                                     </div>
                                 </div>--%>
-                                <div class="col">
-                                    <div class="d-grid gap-2 mt-5 d-md-flex justify-content-md-center">
-                                        <asp:Button ID="btnExport" runat="server" CssClass=" btn btn-secondary font" Text="ดาวน์โหลดเอกสาร" OnClick="btnExport_Click" />
-                                        <asp:Button ID="btnPrint" runat="server" CssClass="btn btn-success font"  Text="พิมพ์" OnClientClick="printGridView();" />
-                                        <%--<asp:Button ID="btnSearch" runat="server" CssClass="btn btn-success" Text="ค้นหา" OnClick="btnSearch_Click" />--%>
-                                    </div> 
-                                </div>
-                            </div>
-                        </form>
+                    <div class="col">
+                        <div class="d-grid gap-2 mt-5 d-md-flex justify-content-md-center">
+                            <asp:Button ID="btnExport" runat="server" CssClass=" btn btn-secondary font" Text="ดาวน์โหลดเอกสาร" OnClick="btnExport_Click" />
+                            <asp:Button ID="btnPrint" runat="server" CssClass="btn btn-success font" Text="พิมพ์" OnClientClick="printGridView();" />
+                            <%--<asp:Button ID="btnSearch" runat="server" CssClass="btn btn-success" Text="ค้นหา" OnClick="btnSearch_Click" />--%>
+                        </div>
                     </div>
                 </div>
-                <div class="col-2"></div>
-            </div>
+            </form>
         </div>
+    </div>
+    <div class="col-2"></div>
+</div>
 
-        <div class="col-md-12 mt-3 container-fluid text-center">
-            <asp:GridView ID="AuthorsList" CssClass="table table-light table-hover" AutoGenerateSelectButton="false" EnableSortingAndPagingCallbacks="false" runat="server" EnableTheming="False" AutoGenerateColumns="False">
-                <Columns>
-                    <asp:BoundField DataField="E_ID" HeaderText="รหัสพนักงาน"></asp:BoundField>
-                    <asp:BoundField DataField="E_Name" HeaderText="ชื่อพนักงาน"></asp:BoundField>
-                    <asp:BoundField DataField="E_number" HeaderText="บัตรประชาชน"></asp:BoundField>
-                    <asp:BoundField DataField="E_date" HeaderText="เริ่มทำงาน"></asp:BoundField>
-                    <asp:BoundField DataField="E_address" HeaderText="ที่อยู่"></asp:BoundField>
-                    <asp:BoundField DataField="E_Tel" HeaderText="โทรศัพท์"></asp:BoundField>
-                    <asp:BoundField DataField="E_status" HeaderText="สถานะ"></asp:BoundField>
-                    <asp:BoundField DataField="E_user" HeaderText="ชื่อเข้าสู่ระบบ"></asp:BoundField>
-                    <asp:BoundField DataField="E_Password" HeaderText="รหัสผ่าน"></asp:BoundField>
+<div class="col-md-12 mt-3 container-fluid text-center">
+    <asp:GridView ID="AuthorsList" CssClass="table table-light table-hover" AutoGenerateSelectButton="false" EnableSortingAndPagingCallbacks="false" runat="server" EnableTheming="False" AutoGenerateColumns="False">
+        <Columns>
+            <asp:BoundField DataField="O_id" HeaderText="รหัสรายการอะไหล่"></asp:BoundField>
+            <asp:BoundField DataField="O_name" HeaderText="รายการอะไหล่"></asp:BoundField>
+            <asp:BoundField DataField="O_Price" HeaderText="ราคา"></asp:BoundField>
+            <asp:BoundField DataField="O_unit" HeaderText="หน่วยนับ"></asp:BoundField>
+            <asp:BoundField DataField="O_Description" HeaderText="รายละเอียด"></asp:BoundField>
+            <asp:BoundField DataField="T_name" HeaderText="ประเถทอะไหล่"></asp:BoundField>
+            <asp:BoundField DataField="B_name" HeaderText="ยี่ห้ออะไหล่"></asp:BoundField>
+            <asp:BoundField DataField="T_id" HeaderText="รหัสประเภท"></asp:BoundField>
+            <asp:BoundField DataField="B_id" HeaderText="รหัสยี่ห้ออะไหล่"></asp:BoundField>
+        </Columns>
+    </asp:GridView>
+</div>
 
-                </Columns>
-            </asp:GridView>
-        </div>
 
 <script type="text/javascript">
     function printGridView() {
@@ -106,7 +104,7 @@
         newWin.document.write('</head><body>');
 
         // เพิ่มหัวข้อรายงาน
-        newWin.document.write('<h1>รายงานข้อมูลพนักงาน</h1>');
+        newWin.document.write('<h1>รายงานข้อมูลรายการสินค้า</h1>');
 
         // เพิ่มวันที่และยอดรวมให้อยู่บรรทัดเดียวกัน
         newWin.document.write('<div class="header-info">');

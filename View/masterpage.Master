@@ -57,6 +57,9 @@
                     <a class="nav-link dropdown-toggle" href="#" id="printmenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">รายงาน
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                        <li><a class="dropdown-item font" href="main.aspx?page=report_type">ประเภทสินค้า</a></li>
+                        <li><a class="dropdown-item font" href="main.aspx?page=report_brand">ยี่ห้อสินค้า</a></li>
+                        <li><a class="dropdown-item font" href="main.aspx?page=report_order">รายการสินค้า</a></li>
                         <li><a class="dropdown-item font" href="main.aspx?page=report_rate">ประเมินราคา</a></li>
                         <li><a class="dropdown-item font" href="main.aspx?page=report_repair">แจ้งซ่อม</a></li>
                         <li><a class="dropdown-item font" href="main.aspx?page=report_payment">ชำระเงิน</a></li>

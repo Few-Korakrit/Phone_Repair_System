@@ -33,7 +33,7 @@
                     </div>
 
                     <div class=" container-fluid">
-                        <h2 class=" text-center">ข้อมูลลูกค้า</h2>
+                        <h2 class=" text-center">รายงานข้อมูลลูกค้า</h2>
                         <form action="#">
                             <div class="row">
                              <%--   <div class="col">
@@ -68,23 +68,56 @@
         </Columns>
     </asp:GridView>
 </div>
+
+
 <script type="text/javascript">
     function printGridView() {
-        var divToPrint = document.getElementById('<%= AuthorsList .ClientID %>'); // ดึง GridView ตาม ID
-        var newWin = window.open('', 'Print-Window');
+        // ดึง GridView ตาม ID
+        var divToPrint = document.getElementById('<%= AuthorsList.ClientID %>');
 
+        // คำนวณยอดรวม
+        //var rows = divToPrint.getElementsByTagName('tr');
+        //var total = 0;
+        //for (var i = 1; i < rows.length; i++) { // ข้ามหัวตาราง
+        //    var cells = rows[i].getElementsByTagName('td');
+        //    if (cells.length > 0) {
+        //        var value = parseFloat(cells[5]?.innerText || 0); // สมมติว่าคอลัมน์ราคาอยู่ index 5
+        //        total += value;
+        //    }
+        //}
+
+        // เปิดหน้าต่างใหม่สำหรับพิมพ์
+        var newWin = window.open('', 'Print-Window');
         newWin.document.open();
-        newWin.document.write('<html><head><title>พิมพ์</title>');
+
+        // เขียน HTML สำหรับการพิมพ์
+        newWin.document.write('<html><head>');
         newWin.document.write('<style>');
+        newWin.document.write('body { font-family: Arial, sans-serif; font-size: 12px; }');
         newWin.document.write('table { border-collapse: collapse; width: 100%; }');
         newWin.document.write('table, th, td { border: 1px solid black; text-align: left; padding: 8px; }');
+        newWin.document.write('h1 { text-align: center; font-size: 20px; margin-bottom: 5px; }');
+        newWin.document.write('.header-info { display: flex; justify-content: space-between; font-size: 10px; margin-bottom: 10px; }');
         newWin.document.write('</style>');
         newWin.document.write('</head><body>');
-        newWin.document.write(divToPrint.outerHTML); // เพิ่มเฉพาะ GridView ในหน้าใหม่
+
+        // เพิ่มหัวข้อรายงาน
+        newWin.document.write('<h1>รายงานข้อมูลลูกค้า</h1>');
+
+        // เพิ่มวันที่และยอดรวมให้อยู่บรรทัดเดียวกัน
+        newWin.document.write('<div class="header-info">');
+        newWin.document.write('<h2>วันที่พิมพ์: ' + new Date().toLocaleDateString('th-TH') + '</h2>');
+        //newWin.document.write('<h2>รวมยอดราคา: ' + total.toFixed(2) + ' บาท</h2>');
+        newWin.document.write('</div>');
+
+        // เพิ่ม GridView
+        newWin.document.write(divToPrint.outerHTML);
+
         newWin.document.write('</body></html>');
         newWin.document.close();
 
-        newWin.print(); // เรียกคำสั่งพิมพ์
+        // สั่งพิมพ์
+        newWin.print();
         newWin.close();
     }
 </script>

@@ -1,0 +1,137 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="masterpage.master.cs" Inherits="ระบบแจ้งซ่อมมือถือ.View.masterpage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <link rel="stylesheet" href="../Assets/Lib/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../Assets/Lib/font-awesome/css/font-awesome.min.css">
+
+    <title>PPM Service ศุนย์ซ่อมมือถือครบวงจร</title>
+    <link rel="icon" type="image/x-icon" href="../Assets/Images/เฟือง (2).png">
+    <%--<asp:contentplaceholder id="head" runat="server">--%>
+    <%--</asp:contentplaceholder>--%>
+
+    <div class=" bg-dark text-white text-center">
+        <%-- <h1>สวัสดีชาวโลก</h1>
+        <p>Resize this responsive page to see the effect!</p>--%>
+        <img src="../Assets/Images/PPM SERVICE.svg" class="img-fluid w-100" />
+    </div>
+
+
+
+    <nav class="navbar navbar-expand-sm navbar-dark " style="background-color: steelblue;" id="navbar" runat="server">
+        <div class="container-fluid">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="main.aspx">หน้าหลัก</a>
+                </li>
+                <% if (ระบบแจ้งซ่อมมือถือ.login.userid != "")
+                    { %>
+                <% if (ระบบแจ้งซ่อมมือถือ.login.level == "1")
+                    { %>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink2" role="button" data-bs-toggle="dropdown" aria-expanded="false">บันทึกข้อมูลหลัก
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                        <li><a class="dropdown-item font" href="main.aspx?page=type">ข้อมูลประเภทอะไหล่</a></li>
+                        <li><a class="dropdown-item font" href="main.aspx?page=brand">ข้อมูลยี่ห้ออะไหล่</a></li>
+                        <li><a class="dropdown-item font" href="main.aspx?page=order">ข้อมูลรายการอะไหล่</a></li>
+                        <li><a class="dropdown-item font" href="main.aspx?page=employee">ข้อมูลพนักงาน</a></li>
+                        <li><a class="dropdown-item font" href="main.aspx?page=customer">ข้อมูลลูกค้า</a></li>
+                    </ul>
+                </li>
+                <% } %>
+                <li class="nav-item">
+                    <a class="nav-link" href="main.aspx?page=crud_rate">ประเมิน</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="main.aspx?page=crud_repair">แจ้งซ่อม</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="main.aspx?page=crud_payment">ชำระเงิน</a>
+                </li>
+                <% if (ระบบแจ้งซ่อมมือถือ.login.level == "1")
+                    { %>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="printmenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">รายงาน
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                        <li><a class="dropdown-item font" href="main.aspx?page=report_rate">ประเมินราคา</a></li>
+                        <li><a class="dropdown-item font" href="main.aspx?page=report_repair">แจ้งซ่อม</a></li>
+                        <li><a class="dropdown-item font" href="main.aspx?page=report_payment">ชำระเงิน</a></li>
+                        <li><a class="dropdown-item font" href="main.aspx?page=report_employee">พนักงาน</a></li>
+                        <li><a class="dropdown-item font" href="main.aspx?page=report_customer">ลูกค้า</a></li>
+                        <%--<li><a class="dropdown-item" href="main.aspx?page=report_dataemployee">ข้อมูลพนักงาน</a></li>--%>
+                    </ul>
+                    <% } %>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <asp:Label ID="name" class="col-sm-3 " runat="server" Text=""></asp:Label>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                        <% if (ระบบแจ้งซ่อมมือถือ.login.level == "1")
+                            { %>
+                        <li><a class="dropdown-item font" href="main.aspx?page=crud_admin">แก้ไขข้อมูล</a></li>
+                        <% } %>
+                        <li><a class="dropdown-item font" href="main.aspx?page=logout">ออกจากระบบ</a></li>
+                    </ul>
+                </li>
+
+                <%--<a class="nav-link" id="logout" runat="server" href="main.aspx?page=logout"><i class="fa fa-sign-out" style="color: whitesmoke" aria-hidden="true"></i></a>--%>
+            </ul>
+            <% } %>
+        </div>
+    </nav>
+
+</head>
+<body>
+    <form runat="server">
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+
+    </form>
+
+    <footer>
+        <div class="mt-5 p-4  text-white text-center" style="background-color: steelblue;">
+            <p class="mb-0">
+                PPM Service ศุนย์ซ่อมมือถือครบวงจร 
+            </p>
+            <p>
+                1/3 ซอย 30 กันยา ถนนสุรนารายณ์ ตำบลในเมือง อำเภอเมือง จังหวัดนครราชสีมา 30000 
+            </p>
+        </div>
+    </footer>
+
+</body>
+<script src="../Assets/Lib/js/bootstrap.bundle.min.js"></script>
+</html>
+
+
+<style>
+    body {
+        font-family: supermarket;
+        font-size: 25px;
+    }
+
+    .font {
+        font-family: supermarket;
+        font-size: 20px;
+    }
+
+    .dropdrown {
+        appearance: none; /* ลบสไตล์เริ่มต้นของเบราว์เซอร์ */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="24px" height="24px"><path d="M7 10l5 5 5-5H7z"/></svg>') no-repeat right 10px center;
+        background-color: #ffffff;
+        background-size: 12px;
+        padding-right: 30px; /* เพิ่มพื้นที่ด้านขวาสำหรับไอคอน */
+        border-radius: 4px;
+        color: #333;
+    }
+</style>

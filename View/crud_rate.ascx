@@ -186,6 +186,11 @@
         font-weight: bold;
     }
 
+    .text-end {
+        text-align: right;
+        flex: 1; /* ใช้ flex เพื่อครอบคลุมพื้นที่ที่เหลือ */
+    }
+
     .divider {
         border-top: 1px solid black;
         margin: 10px 0;
@@ -223,7 +228,7 @@
         1/3 ซ.30กันยา ต.ในเมือง อ.เมือง จ.นครราชสีมา
     </p>
     <div class="divider"></div>
-  
+
     <div class="info-row">
         <p>
             <span class="strong-text">รหัสใบประเมินราคา:</span>
@@ -251,6 +256,8 @@
     <div class="info-row">
         <p>
             <span class="strong-text">ราคา ณ วันที่ประเมิน:</span>
+        </p>
+        <p class="text-end">
             <asp:Label ID="rate_total" runat="server" Text=""></asp:Label>
         </p>
     </div>

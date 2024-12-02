@@ -118,7 +118,7 @@ namespace ระบบแจ้งซ่อมมือถือ.View
             string E_name = row.Cells[5].Text;
             string Date = row.Cells[6].Text;
             string Rate_Broken = row.Cells[7].Text;
-            string Rate_Total = row.Cells[8].Text;
+            string Rate_Total = row.Cells[8].Text + "฿";
             string Note = row.Cells[9].Text;
             string Status = row.Cells[10].Text;
            

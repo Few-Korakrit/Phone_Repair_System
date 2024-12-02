@@ -50,9 +50,8 @@ namespace ระบบแจ้งซ่อมมือถือ.View
                             inner join Repair on Payment.R_id = Repair.R_id
                             inner join rate on Repair.Rate_id = rate.Rate_id
                             inner join Customer on Repair.C_id = Customer.C_ID
-                            where P_id  LIKE  N'%{0}%' or Customer.C_name  LIKE  N'%{0}%' or Customer.C_Tel  LIKE  N'%{0}%'
-                            where R_status = N'ซ่อมเสร็จแล้ว'
-";
+                            where R_status = N'ซ่อมเสร็จแล้ว' and (P_id  LIKE  N'%{0}%' or Customer.C_name  LIKE  N'%{0}%' or Customer.C_Tel  LIKE  N'%{0}%')
+                            ";
                 Query = string.Format(Query, keyword);
             }
             else
